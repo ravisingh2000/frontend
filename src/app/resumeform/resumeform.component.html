@@ -1,0 +1,235 @@
+<div class="container" style="width: 900px;">
+  <p class="text-center fs-2 text"><b>Resume Section</b></p>
+
+  <form [formGroup]="createResumeForm">
+    <div class="row mb-3">
+      <label for="Name " class="col-sm-2 col-form-label fs-4">Name</label>
+      <div class="col-sm-10 form-group">
+        <input type="text" class="form-control " id="Name" formControlName="Name" name="JJame" value="{{Name}}">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="Email" class="col-sm-2 col-form-label fs-4">Email</label>
+      <div class="col-sm-10">
+        <input type="email" class="form-control" name="Email" id="Email" formControlName="Email" value="{{Email}}">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="Phone" class="col-sm-2 col-form-label fs-4">Phone No.</label>
+      <div class="col-sm-10">
+        <input type="tel" class="form-control" name="Phone" id="Phone" formControlName="Phone" value="{{Phone}}">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="Position" class="col-sm-2 col-form-label fs-4">Position</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="Position" id="Position" formControlName="Position" value="{{Position}}">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="Address" class="col-sm-2 col-form-label fs-4">Address</label>
+      <div class="col-sm-10">
+        <textarea type="text" class="form-control" id="Address" formControlName="Address" value="{{Address}}"> </textarea>
+
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="Objective" class="col-sm-2 col-form-label fs-4">Objective</label>
+      <div class="col-sm-10">
+
+        <textarea class="form-control" name="Objective" id="Objective" formControlName="Objective" value={{Objective}} >
+                      </textarea>
+
+      </div>
+    </div>
+    <div class="row" formArrayName="skills" *ngFor="let color of getSkillsControl();index as i">
+      <p *ngIf="i==0" class="col-sm-2 nopadding fs-4">Skills</p>
+      <p *ngIf="i!=0" class="col-sm-2 nopadding fs-4">&nbsp;</p>
+      <div class="col-sm-10 nopadding ">
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" class="form-control" id="Skill" [formControlName]="i" name="Skill[]" value="color"
+              placeholder="Skill"> 
+            <button *ngIf="i==0" class="btn btn-success" type="button" value={{color}} (click)="addSkill();"> <span
+                class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
+            <button *ngIf="i!=0" class="btn btn-danger" type="button" value="hh" #f (click)="removeSkill(i)"> <span
+                class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div formArrayName="Education" *ngFor="let color of getEducationControl();index as i">
+      <div [formGroupName]="i" class="row">
+        <p *ngIf="i==0" class="col-sm-2  nopadding fs-4">Education</p>
+        <p *ngIf="i!=0" class="col-sm-2 nopadding fs-4">&nbsp;</p>
+        <div class="col-sm-3 nopadding">
+          <div class="form-group">
+            <input type="text" class="form-control" id="Educationname" name="Educationname[]" value=""
+              placeholder="Education name" formControlName="Educationname">
+          </div>
+        </div>
+        <div class="col-sm-3 nopadding">
+          <div class="form-group">
+            <input type="text" class="form-control" id="Institution" name="Institution[]" value=""
+              placeholder="Institution" formControlName="Institution">
+          </div>
+        </div>
+        <div class="col-sm-2 nopadding">
+          <div class="form-group">
+            <input type="text" class="form-control" id="ED_Start" name="ED_Start[]" value="" placeholder="Start"
+              formControlName="EduStart">
+          </div>
+        </div>
+
+        <div class="col-sm-2 nopadding">
+          <div class="form-group">
+            <div class="input-group">
+
+              <input type="text" class="form-control" id="ED_END" name="ED_End[]" placeholder="End"
+                formControlName="EduEnd">
+
+              <button *ngIf="i==0" class="btn btn-success" type="button" #f value={{color}} (click)="addEducation();">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
+              <!-- <div class="input-group-btn"> -->
+              <button *ngIf="i!=0" class="btn btn-danger" type="button" #f (click)="removeEducation(i);"> <span
+                  class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div formArrayName="Experience" *ngFor="let color of getExperienceControl();index as i">
+      <div [formGroupName]="i" class="row">
+        <p *ngIf="i==0" class="col-sm-2 nopadding fs-4">Experience</p>
+        <p *ngIf="i!=0" class="col-sm-2 nopadding fs-4">&nbsp;</p>
+        <!-- <p class="col-sm-2 nopadding fs-4">Education</p> -->
+        <div class="col-sm-4 nopadding">
+          <div class="form-group">
+            <input type="text" class="form-control" id="Educationname" name="Educationname[]" value=""
+              placeholder="Experience name" formControlName="Experiencename">
+          </div>
+        </div>
+        <div class="col-sm-4 nopadding">
+          <div class="form-group">
+            <input type="text" class="form-control" id="Institution" name="Institution[]" value=""
+              placeholder="Experience title" formControlName="Experiencetitle">
+          </div>
+        </div>
+        <div class="col-sm-2 nopadding">
+          <div class="form-group">
+            <div class="input-group">
+
+              <input type="text" class="form-control" id="ED_END" name="ED_End[]" placeholder="Year"
+                formControlName="Experienceyear">
+              <button *ngIf="i==0" class="btn btn-success" type="button" #f value={{color}} (click)="addExperience();">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
+              <!-- <div class="input-group-btn"> -->
+              <button *ngIf="i!=0" class="btn btn-danger" type="button" #f (click)="removeExperience(i);"> <span
+                  class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div formArrayName="Project" *ngFor="let color of getProjectControl();index as i">
+      <div [formGroupName]="i" class="row">
+        <p *ngIf="i==0" class="col-sm-2 nopadding fs-4">Project</p>
+        <p *ngIf="i!=0" class="col-sm-2 nopadding fs-4">&nbsp;</p>
+        <div class="col-sm-3 nopadding">
+          <div class="form-group">
+            <input type="text" class="form-control" id="Educationname" name="Educationname[]" value=""
+              placeholder="Project name" formControlName="Projectname">
+          </div>
+        </div>
+        <div class="col-sm-3 nopadding">
+          <div class="form-group">
+            <input type="text" class="form-control" id="Institution" name="Institution[]" value=""
+              placeholder="Project details" formControlName="Projectdetail">
+          </div>
+        </div>
+        <div class="col-sm-2 nopadding">
+          <div class="form-group">
+            <input type="text" class="form-control" id="ED_Start" name="ED_Start[]" value="" placeholder="Start"
+              formControlName="PrStart">
+          </div>
+        </div>
+
+        <div class="col-sm-2 nopadding">
+          <div class="form-group">
+            <div class="input-group">
+
+              <input type="text" class="form-control" id="ED_END" name="ED_End[]" placeholder="End"
+                formControlName="PrEnd">
+              <button *ngIf="i==0" class="btn btn-success" type="button" #f value={{color}} (click)="addProject();">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
+              <button *ngIf="i!=0" class="btn btn-danger" type="button" #f (click)="removeProject(i);"> <span
+                  class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="row" formArrayName="Certificate" *ngFor="let color of getCertificateControl();index as i">
+      <p *ngIf="i==0" class="col-sm-2 nopadding fs-4">Certification</p>
+      <p *ngIf="i!=0" class="col-sm-2 nopadding fs-4">&nbsp;</p>
+      <div class="col-sm-10 nopadding ">
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" class="form-control" id="Skill" [formControlName]="i" name="Skill[]" value=""
+              placeholder="Certificate">
+            <button *ngIf="i==0" class="btn btn-success" type="button" value={{color}} (click)="addCertificate();">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
+            <button *ngIf="i!=0" class="btn btn-danger" type="button" value="hh" #f (click)="removeCertificate(i)">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div formArrayName="Social" *ngFor="let color of getSocialControl();index as i">
+      <div [formGroupName]="i" class="row">
+
+        <p *ngIf="i==0" class="col-sm-2 nopadding fs-4">Social link</p>
+        <p *ngIf="i!=0" class="col-sm-2 nopadding fs-4">&nbsp;</p>
+
+        <div class="col-sm-5 nopadding">
+          <div class="form-group">
+            <input type="text" class="form-control" id="Socialname" name="Socialname[]" value=""
+              placeholder="Social name" formControlName="Socialname">
+          </div>
+        </div>
+
+        <div class="col-sm-5 nopadding">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" class="form-control" id="Sociallink" name="Sociallink[]" placeholder="Social Link"
+                formControlName="Sociallink">
+              <button *ngIf="i==0" class="btn btn-success" type="button" value={{color}} (click)="addSocial();"> <span
+                  class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
+              <button *ngIf="i!=0" class="btn btn-danger" type="button" value="hh" #f (click)="removeSocial(i)"> <span
+                  class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" (click)="saveResumeDate()" class="btn btn-info text-danger   my-3 fs-4 col-sm-12">Create
+      Resume</button>
+  </form>
+
+</div>

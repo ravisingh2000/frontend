@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand fs-4" href="#"><b>Venturepact</b></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item ">
+          <a class="nav-link active " aria-current="page" href="#">Home</a>
+        </li>
+        <li *ngIf="userLogged" class="nav-item">
+          <a class="nav-link text-light " routerLink="/profile">Profile</a>
+        </li>
+        <li  *ngIf="userLogged" class="nav-item">
+          <a  class="nav-link text-light " routerLink="/template">Resume</a>
+        </li>
+        <li  *ngIf="userLogged"class="nav-item">
+          <a class="nav-link text-light " routerLink="/editresume">Edit Resume</a>
+        </li>
+        
+      </ul>
+      <div class="d-flex  ">
+        &nbsp;&nbsp;
+        <a class=" mt-1 text-light btn btn-outline-light  " type="submit" routerLink="/" style="font-size: 14px;">
+          Register
+        </a>&nbsp;&nbsp;
+        <a *ngIf="!userLogged" class="mt-1 nav-link  text-light  btn btn-outline-light " type="submit"
+          routerLink="/login" style="font-size: 14px;">Sign in</a>
+        <a *ngIf="userLogged" class=" mt-1 text-light btn btn-outline-light  " type="submit" (click)="logoutUser()"
+          style="font-size: 14px;">
+          Sign out
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
